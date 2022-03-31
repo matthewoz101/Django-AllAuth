@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
+
+
+
   <head>
+
+    {% load static %}
     <title>{% block head_title %}{% endblock %}</title>
+    
     {% block extra_head %}
     {% endblock %}
+
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/webflow.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/strip4crypto-app.webflow.css' %}" rel="stylesheet" type="text/css">
+
+
   </head>
   <body>
     {% block body %}
+    {% load static %}
 
     {% if messages %}
     <div>
@@ -20,16 +33,30 @@
     {% endif %}
 
     <div>
-      <strong>Menu:</strong>
-      <ul>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
+      
+
+        <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="w-nav">
+    <div class="w-container">
+      <a href="#" class="w-nav-brand"><img src="{% static 'images/Strip4Crypto.png' %}" loading="lazy" width="250" sizes="(max-width: 479px) 96vw, 250px"  alt="" class="image"></a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        <div class="div-block">
+          
+          {% if user.is_authenticated %}
+          <a href="{% url 'account_email' %}" class="button-2 w-button">Change E-mail</a>
+          <a href="{% url 'account_logout' %}" class="button w-button">Sign Out</a>
+          {% else %}
+          <a href="{% url 'account_login' %}" class="button-2 w-button">Login</a>
+          <a href="{% url 'account_signup' %}" class="button w-button">Sign Up</a>
+          {% endif %}
+
+        </div>
+      </nav>
+      <div class="w-nav-button">
+        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+
     </div>
     {% block content %}
     {% endblock %}
